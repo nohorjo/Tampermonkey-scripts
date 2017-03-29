@@ -13,7 +13,7 @@
     var interval = 1000;
     function shrink(){
         try{
-            var width = "550px";
+            var width = "555px";
             var el = document.querySelectorAll("._mh6._wsc")[0].style;
             if(el.width==width)
                 return;
