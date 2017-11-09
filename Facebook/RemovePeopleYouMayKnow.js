@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove 'people you may know'
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Remove 'people you may know' div
 // @author       Nohorjo
 // @match        https://www.facebook.com/*
@@ -24,26 +24,22 @@
 		return found;
 	}
 
-	function getAncestors(el, sel) {
-		var found = [];
+	function findAncestor(el, sel) {
 		var parent = el.parentElement;
-		if (parent) {
-			if (parent.matches(sel)) {
-				found.push(parent);
-			}
-			found.concat(parent, sel);
+		if (parent && !parent.matches(sel)) {
+			return findAncestor(parent, sel);
 		}
-		return found;
+		return parent;
 	}
 
-	findElementsContaining("People you may know", "span").forEach(function(el) {
-		console.log("Found");
-		console.log(el);
-		getAncestors(el, "div._1dwg._1w_m").forEach(function(del) {
-			console.log("del");
-			console.log(del);
-			del.remove();
-		});
-	});
+	setInterval(function() {
+		findElementsContaining("People you may know", "span").forEach(
+				function(el) {
+					console.log("Found", el);
+					var toDel = findAncestor(el, "div._1dwg._1w_m");
+					console.log("Deleting", toDel);
+					toDel.remove();
+				});
+	}, 5000);
 
 })();
