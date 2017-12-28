@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove posts containing certain words
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Remove posts containing certain words
 // @author       Nohorjo
 // @match        https://www.facebook.com/*
@@ -10,39 +10,25 @@
 
 (function () {
     'use strict';
+	
+	var findElementsContaining = (searchText, sel) => Array.from(document.querySelectorAll(sel || "*"))
+		.filter(e => e.textContent == searchText || getComputedStyle(e,"::after")
+                .getPropertyValue("content").replace(/"/g,"") == searchText);
+		
 
-    function findElementsContaining(searchText, sel) {
-        var els = document.querySelectorAll(sel || "*");
-        var found = [];
+    var findAncestor = (sel, elp) => elp && !elp.matches(sel) ? findAncestor(sel, elp.parentElement) : elp;
 
-        for (var i = 0; i < els.length; i++) {
-            if (els[i].textContent == searchText) {
-                found.push(els[i]);
-            }
-        }
-
-        return found;
-    }
-
-    function findAncestor(el, sel) {
-        var parent = el.parentElement;
-        if (parent && !parent.matches(sel)) {
-            return findAncestor(parent, sel);
-        }
-        return parent;
-    }
-
-    function removePost(containing) {
-        setInterval(function () {
-            findElementsContaining(containing, "span, div").forEach(
-                function (el) {
+    var removePost = containing =>
+        setInterval(() => {
+            findElementsContaining(containing, "span, div")
+            	.forEach(el => {
                     console.log("Found", el);
-                    var toDel = findAncestor(el, "div._1dwg._1w_m, div._1-ia");
+                    var toDel = findAncestor("div._1dwg._1w_m, div._1-ia", el.parentElement);
                     console.log("Deleting", toDel);
                     toDel.remove();
                 });
         }, 1000);
-    }
+    
 
     removePost("Suggested Post");
     removePost("Suggested Groups");
