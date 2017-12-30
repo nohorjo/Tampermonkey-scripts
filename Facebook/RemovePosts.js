@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         Remove posts containing certain words
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Remove posts containing certain words
 // @author       Nohorjo
 // @match        https://www.facebook.com/*
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/nohorjo/Tampermonkey-scripts/master/Facebook/RemovePosts.js
+// @updateURL    https://raw.githubusercontent.com/nohorjo/Tampermonkey-scripts/master/Facebook/RemovePosts.js
 // ==/UserScript==
 
 (function () {
