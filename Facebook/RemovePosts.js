@@ -25,7 +25,7 @@
             findElementsContaining(containing, "span, div")
             	.forEach(el => {
                     console.log("Found", el);
-                    var toDel = findAncestor("div._1dwg._1w_m, div._1-ia", el.parentElement);
+                    var toDel = findAncestor("div._1dwg._1w_m, div._1-ia, div._1t3l", el.parentElement);
                     console.log("Deleting", toDel);
                     toDel.remove();
                 });
