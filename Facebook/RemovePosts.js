@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove posts containing certain words
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Remove posts containing certain words
 // @author       Nohorjo
 // @match        https://www.facebook.com/*
