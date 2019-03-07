@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Show Unreviewed
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Highlight unreviewed PRs
 // @author       Muhammed Haque
-// @match        https://github.com/livelink/mobile-photos-app/pull/*
+// @match        https://github.com/livelink/mobile-photos-app/pulls
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/nohorjo/Tampermonkey-scripts/master/GitHub/ShowUnreviewed.js
 // @updateURL    https://raw.githubusercontent.com/nohorjo/Tampermonkey-scripts/master/GitHub/ShowUnreviewed.js
