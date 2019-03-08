@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show Unreviewed
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Highlight unreviewed PRs
 // @author       Muhammed Haque
 // @match        https://github.com/livelink/mobile-photos-app/pulls
@@ -14,7 +14,11 @@
     'use strict';
 
     const user = document.querySelector('img.avatar[src^=http]').attributes.alt.textContent.slice(1);
-    Array.from(document.querySelectorAll('.table-fixed')).filter(e => e.querySelector('a.muted-link').innerText !== user).forEach(async e => {
+    const prs = Array.from(document.querySelectorAll('.table-fixed'));
+    prs.forEach(e => {
+        e.style.background = "wheat";
+    });
+    prs.filter(e => e.querySelector('a.muted-link').innerText !== user).forEach(async e => {
         const _document = new DOMParser().parseFromString(await fetch(e.querySelector('a').href).then(x => x.text()), "text/html")
         if (!Array.from(_document.querySelectorAll('.sidebar-assignee p'))
             .some(e =>
