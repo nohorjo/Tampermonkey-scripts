@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show Unreviewed
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Highlight unreviewed PRs
 // @author       Muhammed Haque
 // @match        https://github.com/livelink/mobile-photos-app/pulls
@@ -24,7 +24,7 @@
             .some(e =>
                   e.querySelector('span')
                   && e.querySelector('span').innerText.trim() === user
-                  && e.querySelector('.octicon-check')
+                  && !e.querySelector('.octicon-primitive-dot'))
             )
         ) {
             e.style.background = "lightcoral";
