@@ -24,7 +24,7 @@
             .some(e =>
                   e.querySelector('span')
                   && e.querySelector('span').innerText.trim() === user
-                  && !e.querySelector('.octicon-primitive-dot'))
+                  && !e.querySelector('.octicon-primitive-dot')
             )
         ) {
             e.style.background = "lightcoral";
