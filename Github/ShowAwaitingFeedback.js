@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Show Awaiting Feedback
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Highlight blocks where the last comment is not you
 // @author       Muhammed Haque
 // @match        https://github.com/livelink/mobile-photos-app/pull/*
@@ -14,16 +14,16 @@
     'use strict';
 
     const user = document.querySelector('img.avatar[src^=http]').attributes.alt.textContent.slice(1);
+    if (document.querySelectorAll('.gh-header-meta a.author')[0].textContent === user) {
+        document.querySelectorAll('.js-line-comments').forEach(n => {
+            const [ last ] = Array.from(n.querySelectorAll('.review-comment .js-suggested-changes-contents > h4 > strong')).slice(-1);
 
-    document.querySelectorAll('.js-line-comments').forEach(n => {
-        const [ last ] = Array.from(n.querySelectorAll('.review-comment .js-suggested-changes-contents > h4 > strong')).slice(-1);
-
-        if (user === last.textContent.trim()) {
-            n.style.background = "wheat";
-        } else {
-            n.style.background = "lightcoral";
-        }
-    });
-
+            if (user === last.textContent.trim()) {
+                n.style.background = "wheat";
+            } else {
+                n.style.background = "lightcoral";
+            }
+        });
+    }
 
 })();
